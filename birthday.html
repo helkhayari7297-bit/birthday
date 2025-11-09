@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎂</title>
+
+<style>
+    body {
+        background-color: #0D0D0D;
+        color: #FFCC66;
+        font-family: 'Comic Sans MS', cursive;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .wrapper {
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .text-box {
+        width: 45%;
+        font-size: 2.2rem;
+        line-height: 1.3;
+    }
+
+    .cake-box {
+        width: 45%;
+        text-align: center;
+        position: relative;
+    }
+
+    #cake {
+        width: 330px;
+    }
+
+    #flame {
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 450px;
+    }
+
+    /* CONFETTI */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        top: -20px;
+        animation: fall 2.5s linear forwards;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(120vh);
+            opacity: 0;
+        }
+    }
+
+    /* Romantic message style */
+    #message {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        text-align: center;
+        font-size: 2.3rem;
+        color: pink;
+        opacity: 0;
+        transition: opacity 2s ease-in-out;
+    }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="text-box">
+        <h1>Happy Birthday </h1>
+        <p id="status">Blow</p>
+    </div>
+
+    <div class="cake-box">
+        <!-- ✅ corrected: id="flame" not class -->
+        <img id="flame" src="flame.png" alt="flame">
+        <img id="cake" src="cake.png" alt="cake">
+    </div>
+</div>
+
+<!-- ✅ romantic message hidden until blow -->
+<div id="message">✨ You are my favorite person in this world ✨</div>
+
+<script>
+let flame = document.getElementById("flame");
+let statusText = document.getElementById("status");
+let message = document.getElementById("message");
+
+/* Automatically start microphone detection */
+navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    let audioContext = new AudioContext();
+    let mic = audioContext.createMediaStreamSource(stream);
+    let analyser = audioContext.createAnalyser();
+    mic.connect(analyser);
+
+    let data = new Uint8Array(analyser.frequencyBinCount);
+
+    function detect() {
+        analyser.getByteFrequencyData(data);
+        let volume = data.reduce((a, b) => a + b) / data.length;
+
+        if (volume > 40) {
+            flame.style.display = "none";
+            statusText.textContent = "🎉 Candle off!";
+            fallingConfetti();
+            showRomanticMessage();
+            return;
+        }
+
+        requestAnimationFrame(detect);
+    }
+
+    detect();
+});
+
+/* CONFETTI FALLING ANIMATION */
+function fallingConfetti() {
+    const colors = ["red", "blue", "lime"];
+
+    for (let i = 0; i < 70; i++) {
+        let confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+
+/* ✅ Romantic message fade-in */
+function showRomanticMessage() {
+    message.style.opacity = 1;
+}
+</script>
+
+</body>
+</html>
+
