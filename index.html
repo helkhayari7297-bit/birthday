@@ -77,6 +77,57 @@
         opacity: 0;
         transition: opacity 2s ease-in-out;
     }
+
+    /* Fully responsive for all devices */
+    @media (max-width: 1024px) {
+        .wrapper {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .text-box, .cake-box {
+            width: 90%;
+            text-align: center;
+        }
+
+        .text-box {
+            font-size: 1.8rem;
+        }
+
+        #cake {
+            width: 300px;
+        }
+
+        #flame {
+            width: 120px;
+            top: -20px;
+        }
+
+        #message {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .text-box {
+            font-size: 1.4rem;
+        }
+
+        #cake {
+            width: 200px;
+        }
+
+        #flame {
+            width: 80px;
+            top: -15px;
+        }
+
+        #message {
+            font-size: 1.6rem;
+        }
+    }
 </style>
 </head>
 <body>
@@ -88,13 +139,11 @@
     </div>
 
     <div class="cake-box">
-        <!-- ✅ corrected: id="flame" not class -->
         <img id="flame" src="flame.png" alt="flame">
         <img id="cake" src="cake.png" alt="cake">
     </div>
 </div>
 
-<!-- ✅ romantic message hidden until blow -->
 <div id="message">✨ You are my favorite person in this world ✨</div>
 
 <script>
@@ -145,7 +194,7 @@ function fallingConfetti() {
     }
 }
 
-/* ✅ Romantic message fade-in */
+/* Romantic message fade-in */
 function showRomanticMessage() {
     message.style.opacity = 1;
 }
@@ -153,4 +202,7 @@ function showRomanticMessage() {
 
 </body>
 </html>
+
+
+
 
