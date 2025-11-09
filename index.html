@@ -46,7 +46,7 @@
         top: -25px;
         left: 50%;
         transform: translateX(-50%);
-        width: 450px;
+        width: 450px; /* Desktop flame size */
     }
 
     /* CONFETTI */
@@ -78,7 +78,7 @@
         transition: opacity 2s ease-in-out;
     }
 
-    /* Fully responsive for all devices */
+    /* Fully responsive for tablets */
     @media (max-width: 1024px) {
         .wrapper {
             flex-direction: column;
@@ -101,7 +101,7 @@
         }
 
         #flame {
-            width: 120px;
+            width: 200px;  /* Updated flame size for tablets */
             top: -20px;
         }
 
@@ -110,6 +110,7 @@
         }
     }
 
+    /* Fully responsive for phones */
     @media (max-width: 480px) {
         .text-box {
             font-size: 1.4rem;
@@ -120,7 +121,7 @@
         }
 
         #flame {
-            width: 80px;
+            width: 150px;  /* Updated flame size for phones */
             top: -15px;
         }
 
@@ -202,7 +203,3 @@ function showRomanticMessage() {
 
 </body>
 </html>
-
-
-
-
