@@ -11,7 +11,9 @@
         color: #FFCC66;
         font-family: 'Comic Sans MS', cursive;
         margin: 0;
-        height: 100vh;
+        height: auto;          /* Changed for mobile scaling */
+        min-height: 100vh;     /* Keep full screen on desktop */
+        padding: 20px;         /* Add breathing room on phones */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -102,7 +104,7 @@
 
         #flame {
             width: 200px;  /* Updated flame size for tablets */
-            top: -20px;
+            top: -10px;    /* Adjusted position for visibility */
         }
 
         #message {
@@ -121,8 +123,8 @@
         }
 
         #flame {
-            width: 150px;  /* Updated flame size for phones */
-            top: -15px;
+            width: 180px;  /* Bigger flame for phones */
+            top: -5px;     /* Adjust position to be visible */
         }
 
         #message {
